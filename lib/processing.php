@@ -17,7 +17,7 @@ function fallout($message = '')
 }
 
 // Include all the things we will need.
-require('lib/xtemplate.class.php');
+require('lib/3rdparty/xtemplate.class.php');
 require('lib/config.php');
 require('lib/database/connect.php');
 
