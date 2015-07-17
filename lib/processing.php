@@ -16,9 +16,13 @@ function fallout($message = '')
 	die($message);
 }
 
+// make sure the config file exists
+if(!file_exists('lib/config.php'))
+	die('Copy lib/config.example.php to lib/config.php and edit it!');
+
 // Include all the things we will need.
-require('lib/3rdparty/xtemplate.class.php');
 require('lib/config.php');
+require('lib/3rdparty/xtemplate.class.php');
 require('lib/database/connect.php');
 
 // include all the database related files
