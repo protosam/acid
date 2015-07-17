@@ -409,7 +409,7 @@ class Proto {
 }
 
 
-$db = new Proto($CONF['hostname'], $CONF['database']['username'], $CONF['database']['password'], $CONF['database']['database']);
+$db = new Proto($CONF['database']['hostname'], $CONF['database']['username'], $CONF['database']['password'], $CONF['database']['database']);
 if ($db->linker->connect_error)
 	fallout("Error connecting to MySQL");
 
