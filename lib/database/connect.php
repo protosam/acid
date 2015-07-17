@@ -1,6 +1,4 @@
 <?php
-<?php
-
 // Quick Proto DB abstraction kit
 define('PROTO_PATH', realpath(dirname(__FILE__)));
 
@@ -409,6 +407,7 @@ class Proto {
 	}
 
 }
+
 
 $db = new Proto($CONF['hostname'], $CONF['database']['username'], $CONF['database']['password'], $CONF['database']['database']);
 if ($db->linker->connect_error)
