@@ -106,9 +106,9 @@ class Proto {
 	// This will begin using our mapped out table file
 	public function openTable($table) {
 		// load our tables file. It may include functions for special uses
-		if (file_exists(PROTO_PATH . '/tables/' . $table . '.php')) {
+		if (file_exists(PROTO_PATH . '/' . $table . '.php')) {
 
-			require_once(PROTO_PATH . '/tables/' . $table . '.php');
+			require_once(PROTO_PATH . '/' . $table . '.php');
 			$tmp_new = new $table();
 
 			$tmp_new->linker = $this->linker;
