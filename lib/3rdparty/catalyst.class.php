@@ -65,11 +65,11 @@
 					$query = str_replace('"{' . $key . '}"', '{' . $key . '}', $query);
 					$query = str_replace("'{" . $key . "}'", '{' . $key . '}', $query);
 					// add the sanitized string
-					$val_sanitized = $this->linker->escape_string($val);
+					$val_sanitized = $this->link->escape_string($val);
 					$query = str_replace('{' . $key . '}', '"' . $val_sanitized . '"', $query);
 				} else {
 					// add the sanitized string
-					$val_sanitized = $this->linker->escape_string($val);
+					$val_sanitized = $this->link->escape_string($val);
 					$query = str_replace('{' . $key . '}', $val_sanitized, $query);
 				}
 			}
@@ -77,9 +77,9 @@
 			$this->prepared = array();
 		}
 		$this->last_query = $query;
-		$this->last_query_result = $this->linker->query($query);
+		$this->last_query_result = $this->link->query($query);
 		if (!$this->last_query_result) {
-			echo "MySQL Error: " . $this->linker->error . "<br>\n";
+			echo "MySQL Error: " . $this->link->error . "<br>\n";
 		}
 		if ($autonext && $this->count() > 0)
 			$this->next();
