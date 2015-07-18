@@ -29,7 +29,7 @@
 	}
 	
 	public function get($var){
-		
+		return $this->raw_fields[$var];
 	}
 	
 	public function findby($var, $val){
