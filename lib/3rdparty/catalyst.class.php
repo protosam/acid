@@ -32,6 +32,10 @@
 		
 	}
 	
+	public function findby($var, $val){
+		
+	}
+	
 	public function save(){
 		
 	}
@@ -40,10 +44,7 @@
 		
 	}
 	
-	// Used to sanitize data going through find()
-	// WHERE fragment will look like find('WHERE variable="{value}"')
-	// Usage would be like $proto->prepare('value', 'Actual Thing');
-	// YAY Sanitization! :)
+	// Used to sanitize data going through query()
 	public function prepare($var, $val = null) {
 		if (is_array($var) && count($var) > 0) {
 			foreach ($var as $key => $val) {
