@@ -89,7 +89,7 @@
 		$this->raw_fields = $this->last_query_result->fetch_assoc();
 		$this->mod_fields = array();
 		// return false if we're done providing data
-		if ($this->current_row_data == NULL) {
+		if ($this->raw_fields == NULL) {
 			// clean up variables
 			$this->raw_fields = array();
 			$this->mod_fields = array();
