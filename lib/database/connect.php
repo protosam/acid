@@ -4,6 +4,7 @@ $db = new mysqli($CONF['database']['hostname'], $CONF['database']['username'], $
 if ($db->linker->connect_error)
 	fallout("Error connecting to MySQL");
 
+catalyst::setlink($db);
 
 function db_close()
 {
