@@ -5,7 +5,9 @@ $CONF = array(
 		'hostname' => '',
 		'database' => '',
 		'username' => '',
-		'password' => ''
+		'password' => '',
+		'port' => null,
+		'socket' => null
 	),
 
 );
