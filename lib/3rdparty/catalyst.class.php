@@ -57,7 +57,7 @@
 			$fields = '`' . $this->primary_key . '`';
 			$values = 'null';
 			foreach ($this->raw_fields as $field => $value) {
-				$value = $this->link->escape_string($value);
+				$values .= ", '".$this->link->escape_string($value)."'";
 				$fields .= ', `' . $field . '`';
 			}
 			$final_statement .= "(" . $fields . ") VALUES (" . $values . ");";
