@@ -9,5 +9,8 @@ __Catalyst__
 __Vision__  
 `vision` is the templating system provided in `acid`. It provides the ability to have straight forward HTML files in your application, which makes it easier to segregate work between your developers and designers.  
   
+__Reagent__  
+`reagent` is a sanitization toolkit. It is used in `acid` to help you verify people are providing you with input that is safe for end-user consumption.
+  
 __Todo List__  
 * Create documentation that includes practices and standards for `acid`.
