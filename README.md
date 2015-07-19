@@ -10,5 +10,4 @@ __xTemplate__
 `xTemplate` is the templating system provided in `acid`. It provides the ability to have straight forward HTML files in your application, which makes it easier to segregate work between your developers and designers.  
   
 __Todo List__  
-* Create a light weight and non-restricting database abstraction layer.
-* Create documentation that includes practices and standards for slim.
+* Create documentation that includes practices and standards for `acid`.
