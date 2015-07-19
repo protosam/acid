@@ -24,10 +24,21 @@ if(!file_exists('lib/config.php'))
 require('lib/config.php');
 require('lib/3rdparty/xtemplate.class.php');
 require('lib/3rdparty/catalyst.class.php');
-require('lib/database/connect.php');
+
+
+// Connect to the database
+$db = new mysqli($CONF['database']['hostname'], $CONF['database']['username'], $CONF['database']['password'], $CONF['database']['database'], $CONF['database']['port'], $CONF['database']['socket']);
+if ($db->linker->connect_error)
+	fallout("Error connecting to MySQL");
+
+// setup catalyst to use the $db link
+catalyst::setlink($db);
+
+
 
 // include all the database related files
-$dbfiles = preg_grep('/.db.php$/', scandir('lib/database'));
+//$dbfiles = preg_grep('/.db.php$/', scandir('lib/database'));
+$dbfiles = scandir('lib/database');
 foreach($dbfiles as $k => $dbfilename){
 	include($dbfilename);
 }
@@ -74,7 +85,7 @@ function shutdown()
 	}
 
 	// ensure db connection is closed out.
-	db_close();
+	$db->close();
 }
 
 // make sure the shutdown command is called before we exist our script
