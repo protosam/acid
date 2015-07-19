@@ -61,9 +61,9 @@ foreach($THEMES as $dir => $file){
 
 // lets spit out a header...
 if($tpl_file && $tpl_file != ""){
-	$xtpl = new vision($tpl_file);
-	$xtpl->parse('header');
-	$xtpl->out('header');
+	$tpl = new vision($tpl_file);
+	$tpl->parse('header');
+	$tpl->out('header');
 }
 
 
@@ -80,9 +80,9 @@ function shutdown()
 
 	// lets spit out a footer...
 	if($tpl_file && $tpl_file != ""){
-		$xtpl->restart($tpl_file);
-		$xtpl->parse('footer');
-		$xtpl->out('footer');
+		$tpl->restart($tpl_file);
+		$tpl->parse('footer');
+		$tpl->out('footer');
 	}
 
 	// ensure db connection is closed out.
