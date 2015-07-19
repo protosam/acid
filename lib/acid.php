@@ -22,8 +22,8 @@ if(!file_exists('lib/config.php'))
 
 // Include all the things we will need.
 require('lib/config.php');
-require('lib/3rdparty/xtemplate.class.php');
 require('lib/3rdparty/catalyst.class.php');
+require('lib/3rdparty/vision.class.php');
 
 
 // Connect to the database
