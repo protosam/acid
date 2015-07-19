@@ -6,8 +6,8 @@ Out of the box, `acid` expects  you to be using a database, so it will require y
 __Catalyst__  
 `catalyst` is a light weight wrapper for MySQLi. It does quite a bit of lifting for you. It is included with `acid` and all the database models are intended to be stored in `lib/database`. `catalyst` makes very few assumptions about your database model. It is extremely flexible and can swiftly up development since it provides CRUD management while following an active record pattern.  
 
-__xTemplate__  
-`xTemplate` is the templating system provided in `acid`. It provides the ability to have straight forward HTML files in your application, which makes it easier to segregate work between your developers and designers.  
+__Vision__  
+`vision` is the templating system provided in `acid`. It provides the ability to have straight forward HTML files in your application, which makes it easier to segregate work between your developers and designers.  
   
 __Todo List__  
 * Create documentation that includes practices and standards for `acid`.
