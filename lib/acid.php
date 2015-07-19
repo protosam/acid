@@ -5,14 +5,14 @@ $cms_dir = realpath(dirname(__FILE__).'/..').'/';
 chdir($cms_dir);
 
 // This variable is for the special die function.
-$fallout = false;
+$overdose = false;
 
 // Special die function that prevents shutdown() procedure
 // It is meant for unrecoverable errors that will cause
 // more problems during shutdown() procedure
-function fallout($message = '')
+function overdose($message = '')
 {	extract($GLOBALS, EXTR_REFS | EXTR_SKIP);
-	$fallout = true;
+	$overdose = true;
 	die($message);
 }
 
@@ -30,7 +30,7 @@ require('lib/3rdparty/vision.class.php');
 // Connect to the database
 $db = new mysqli($CONF['database']['hostname'], $CONF['database']['username'], $CONF['database']['password'], $CONF['database']['database'], $CONF['database']['port'], $CONF['database']['socket']);
 if ($db->linker->connect_error)
-	fallout("Error connecting to MySQL");
+	overdose("Error connecting to MySQL");
 
 // setup catalyst to use the $db link
 catalyst::setlink($db);
@@ -74,8 +74,8 @@ function shutdown()
 	// Make our working directory the directory above lib/processing.php
 	chdir($cms_dir);
 
-	// if we used fallout() we will just do nothing futher.
-	if($fallout)
+	// if we used overdose() we will just do nothing futher.
+	if($overdose)
 		return;
 
 	// lets spit out a footer...
