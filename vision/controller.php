@@ -6,7 +6,7 @@ $TEMPLATES = array(
 
 
 // this is logic neccessary for our headers
-function header()
+function vision_header()
 {	extract($GLOBALS, EXTR_REFS | EXTR_SKIP);
 	$tpl = new vision($tpl_file);
 	$tpl->parse('header');
@@ -14,7 +14,7 @@ function header()
 }
 
 // this is logic neccessary for our footers
-function footer()
+function vision_footer()
 {	extract($GLOBALS, EXTR_REFS | EXTR_SKIP);
 	$tpl = new vision($tpl_file);
 	$tpl->parse('footer');
