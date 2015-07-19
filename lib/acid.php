@@ -4,6 +4,11 @@ $cms_dir = realpath(dirname(__FILE__).'/..').'/';
 // Make our working directory the directory above lib/processing.php
 chdir($cms_dir);
 
+// in case of command line runs
+if(!isset($_SERVER['REQUEST_URI'])){
+	$_SERVER['REQUEST_URI'] = '/';
+}
+
 // This variable is for the special die function.
 $overdose = false;
 
@@ -29,7 +34,7 @@ require('lib/3rdparty/vision.class.php');
 
 // Connect to the database
 $db = new mysqli($CONF['database']['hostname'], $CONF['database']['username'], $CONF['database']['password'], $CONF['database']['database'], $CONF['database']['port'], $CONF['database']['socket']);
-if ($db->linker->connect_error)
+if ($db->connect_error)
 	overdose("Error connecting to MySQL");
 
 // setup catalyst to use the $db link
@@ -38,10 +43,9 @@ catalyst::setlink($db);
 
 
 // include all the database related files
-//$dbfiles = preg_grep('/.db.php$/', scandir('lib/database'));
-$dbfiles = scandir('lib/database');
+$dbfiles = preg_grep('/.php$/', scandir('lib/database'));
 foreach($dbfiles as $k => $dbfilename){
-	include($dbfilename);
+	include('lib/database/'.$dbfilename);
 }
 
 
