@@ -3,6 +3,6 @@
 // First match wins.
 
 $THEMES = array(
-	'/blah/stuff' => 'themes/impact/overall2.tpl',
-	'/' => 'themes/default/overall.tpl',
+	'/blah/stuff' => 'vision/overall2.tpl',
+	'/' => 'vision/overall.tpl',
 );
