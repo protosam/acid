@@ -1,5 +1,7 @@
 A simplistic framework designed to include 1 file into your script to provide you with a full MVC patterned application. It is compatible with newer versions of PHP and also HHVM out of the box. The goal of slim is to keep PHP programming practices as simplistic as possible.  
   
+If you would like to get started with Acid, check out our wiki page https://github.com/Igknighted/acid/wiki  
+  
 __Setup__  
 Out of the box, `acid` expects  you to be using a database, so it will require you to copy `drop/config.example.php` to  `drop/config.php` and edit it, to provide it with database details. Other than that, there is no setup. You just include `drop/acid.php` at the start of all of your files and it will provide access to helpers for database access as well as templating.  
   
