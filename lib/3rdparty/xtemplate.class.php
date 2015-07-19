@@ -4,25 +4,14 @@
 //error_reporting(E_ALL);
 
 /**
- * XTemplate PHP templating engine
+ * vision PHP templating engine
  *
- * @package XTemplate
- * @author Barnabas Debreceni [cranx@users.sourceforge.net]
- * @copyright Barnabas Debreceni 2000-2001
- * @author Jeremy Coates [cocomp@users.sourceforge.net]
- * @copyright Jeremy Coates 2002-2007
- * @see license.txt LGPL / BSD license
- * @since PHP 5
- * @link $HeadURL: https://xtpl.svn.sourceforge.net/svnroot/xtpl/trunk/xtemplate.class.php $
- * @version $Id: xtemplate.class.php 21 2007-05-29 18:01:15Z cocomp $
- *
- *
- * XTemplate class - http://www.phpxtemplate.org/ (x)html / xml generation with templates - fast & easy
+ * a modified version of the XTemplate class - http://www.phpxtemplate.org/ (x)html / xml generation with templates - fast & easy
  * Latest stable & Subversion versions available @ http://sourceforge.net/projects/xtpl/
  * License: LGPL / BSD - see license.txt
  * Changelog: see changelog.txt
  */
-class XTemplate {
+class vision {
 
 	/**
 	 * Properties
