@@ -51,7 +51,7 @@ foreach($dbfiles as $k => $dbfilename){
 
 // Lets figure out what template file we're using... if any.
 // Also provides footer/header logic
-require('vision/controller.php');
+require('drop/vision/controller.php');
 
 // initiate the variable explicitly for catch-all.
 $tpl_file = false;
