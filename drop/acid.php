@@ -27,9 +27,9 @@ if(!file_exists('drop/config.php'))
 
 // Include all the things we will need.
 require('drop/config.php');
-require('drop/3rdparty/catalyst.class.php');
-require('drop/3rdparty/reagent.class.php');
-require('drop/3rdparty/vision.class.php');
+require('drop/components/catalyst.class.php');
+require('drop/components/reagent.class.php');
+require('drop/components/vision.class.php');
 
 
 // Connect to the database
