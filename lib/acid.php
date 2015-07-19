@@ -60,7 +60,7 @@ foreach($THEMES as $dir => $file){
 
 // lets spit out a header...
 if($tpl_file && $tpl_file != ""){
-	$xtpl = new xTemplate($tpl_file);
+	$xtpl = new vision($tpl_file);
 	$xtpl->parse('header');
 	$xtpl->out('header');
 }
