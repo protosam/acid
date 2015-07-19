@@ -62,7 +62,7 @@ foreach($TEMPLATES as $dir => $file){
 
 // lets spit out a header...
 if($tpl_file && $tpl_file != "")
-	header();
+	vision_header();
 
 
 
@@ -77,7 +77,7 @@ function shutdown()
 		return;
 
 	if($tpl_file && $tpl_file != "")
-		footer();
+		vision_footer();
 
 	// ensure db connection is closed out.
 	$db->close();
