@@ -1,7 +1,9 @@
 <?php
+// this array controls which template file is used based on the URL path
+// first match will be used.
 $TEMPLATES = array(
-	'/blah/stuff' => 'vision/overall2.tpl',
-	'/' => 'vision/overall.tpl',
+	'/blah/stuff' => 'drop/vision/overall2.tpl',
+	'/' => 'drop/vision/overall.tpl',
 );
 
 
