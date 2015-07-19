@@ -46,12 +46,13 @@ foreach($dbfiles as $k => $dbfilename){
 
 
 // Lets figure out what template file we're using... if any.
-require('themes/config.php');
+// Also provides footer/header logic
+require('vision/controller.php');
 
 // initiate the variable explicitly for catch-all.
 $tpl_file = false;
 // iterate the $THEMES array, to figure out which match to use for our path.
-foreach($THEMES as $dir => $file){
+foreach($TEMPLATES as $dir => $file){
 	if(preg_match('/^'.preg_quote($dir, '/').'/', $_SERVER['REQUEST_URI'])){
 		$tpl_file = $file;
 		break;
@@ -60,11 +61,8 @@ foreach($THEMES as $dir => $file){
 }
 
 // lets spit out a header...
-if($tpl_file && $tpl_file != ""){
-	$tpl = new vision($tpl_file);
-	$tpl->parse('header');
-	$tpl->out('header');
-}
+if($tpl_file && $tpl_file != "")
+	header();
 
 
 
@@ -78,12 +76,8 @@ function shutdown()
 	if($overdose)
 		return;
 
-	// lets spit out a footer...
-	if($tpl_file && $tpl_file != ""){
-		$tpl->restart($tpl_file);
-		$tpl->parse('footer');
-		$tpl->out('footer');
-	}
+	if($tpl_file && $tpl_file != "")
+		footer();
 
 	// ensure db connection is closed out.
 	$db->close();
