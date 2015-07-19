@@ -1,7 +1,7 @@
 <?php
 // Get the directory above processing.php
 $cms_dir = realpath(dirname(__FILE__).'/..').'/';
-// Make our working directory the directory above lib/processing.php
+// Make our working directory the directory above drop/processing.php
 chdir($cms_dir);
 
 // in case of command line runs
@@ -22,14 +22,14 @@ function overdose($message = '')
 }
 
 // make sure the config file exists
-if(!file_exists('lib/config.php'))
-	die('Copy lib/config.example.php to lib/config.php and edit it!');
+if(!file_exists('drop/config.php'))
+	die('Copy drop/config.example.php to drop/config.php and edit it!');
 
 // Include all the things we will need.
-require('lib/config.php');
-require('lib/3rdparty/catalyst.class.php');
-require('lib/3rdparty/reagent.class.php');
-require('lib/3rdparty/vision.class.php');
+require('drop/config.php');
+require('drop/3rdparty/catalyst.class.php');
+require('drop/3rdparty/reagent.class.php');
+require('drop/3rdparty/vision.class.php');
 
 
 // Connect to the database
@@ -43,9 +43,9 @@ catalyst::setlink($db);
 
 
 // include all the database related files
-$dbfiles = preg_grep('/.php$/', scandir('lib/database'));
+$dbfiles = preg_grep('/.php$/', scandir('drop/database'));
 foreach($dbfiles as $k => $dbfilename){
-	include('lib/database/'.$dbfilename);
+	include('drop/database/'.$dbfilename);
 }
 
 
@@ -73,7 +73,7 @@ if($tpl_file && $tpl_file != "")
 // Pretty much the footer code.
 function shutdown()
 {	extract($GLOBALS, EXTR_REFS | EXTR_SKIP);
-	// Make our working directory the directory above lib/processing.php
+	// Make our working directory the directory above drop/processing.php
 	chdir($cms_dir);
 
 	// if we used overdose() we will just do nothing futher.
