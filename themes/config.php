@@ -4,5 +4,5 @@
 
 $THEMES = array(
 	'/blah/stuff' => 'themes/impact/overall2.tpl',
-	'/' => 'themes/overall.tpl',
+	'/' => 'themes/default/overall.tpl',
 );
