@@ -320,7 +320,7 @@ class vision {
      * @param boolean $autosetup If true, run setup() as part of constuctor
      * @return XTemplate
      */
-	public function XTemplate ($file, $tpldir = '', $files = null, $mainblock = 'main', $autosetup = true) {
+	public function vision ($file, $tpldir = '', $files = null, $mainblock = 'main', $autosetup = true) {
 
 		assert('Deprecated - use PHP 5 constructor');
 	}
