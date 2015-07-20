@@ -27,7 +27,6 @@ if(!file_exists('drop/config.php'))
 
 // Include all the things we will need.
 require('drop/config.php');
-require('drop/components/rehab.class.php');
 require('drop/components/catalyst.class.php');
 require('drop/components/reagent.class.php');
 require('drop/components/vision.class.php');
