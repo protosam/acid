@@ -1,4 +1,6 @@
 <?php
+// start buffering
+ob_start();
 // Get the directory above processing.php
 $cms_dir = realpath(dirname(__FILE__).'/..').'/';
 // Make our working directory the directory above drop/processing.php
@@ -18,6 +20,10 @@ $overdose = false;
 function overdose($message = '')
 {	extract($GLOBALS, EXTR_REFS | EXTR_SKIP);
 	$overdose = true;
+	
+	// end buffering
+	ob_end_flush();
+	
 	die($message);
 }
 
@@ -85,6 +91,9 @@ function shutdown()
 
 	// ensure db connection is closed out.
 	$db->close();
+	
+	// end buffering
+	ob_end_flush();
 }
 
 // make sure the shutdown command is called before we exist our script
