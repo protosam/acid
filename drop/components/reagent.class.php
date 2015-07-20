@@ -6,7 +6,7 @@ require('drop/3rdparty/htmlLawed.php');
 class reagent {
 
 	public function limit_html($dirty_html, $tags_allowed){
-		$config = array('safe'=>1, 'elements' => '-*, '.$tags_allowed);
+		$config = array('safe'=>1, 'elements' => '-*');
     		return htmLawed($dirty_html, $config);
 	}
 
