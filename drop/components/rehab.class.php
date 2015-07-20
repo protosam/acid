@@ -8,7 +8,7 @@ class rehab {
 	
 	public function profile(){
 		if($this->running){
-			 $runtime = (microtime(true) - SCRIPT_START_TIME)/60;
+			 $runtime = microtime(true) - SCRIPT_START_TIME;
 			echo '<hr>';
 			echo memory_get_peak_usage();
 			echo '<hr>';
