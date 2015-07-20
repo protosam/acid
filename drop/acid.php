@@ -85,6 +85,9 @@ function shutdown()
 
 	// ensure db connection is closed out.
 	$db->close();
+	
+	$rehab->profile();
+	
 }
 
 // make sure the shutdown command is called before we exist our script
