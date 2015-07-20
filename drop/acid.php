@@ -1,4 +1,5 @@
 <?php
+define('SCRIPT_START_TIME', microtime(true));
 // Get the directory above processing.php
 $cms_dir = realpath(dirname(__FILE__).'/..').'/';
 // Make our working directory the directory above drop/processing.php
