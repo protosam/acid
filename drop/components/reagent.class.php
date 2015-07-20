@@ -6,7 +6,7 @@ require('drop/3rdparty/htmlLawed.php');
 class reagent {
 
 	public function limit_html($dirty_heml, $tags_allowed){
-		$config = array('safe'=>1, 'elements' => $tags_allowed);
+		$config = array('safe'=>0, 'elements' => $tags_allowed);
     		return htmLawed($dirty_html, $config);
 	}
 
@@ -16,7 +16,7 @@ class reagent {
 	}
 
 	public function purge_html($dirty_html){
-		$config = array('safe'=>1, 'elements' => '-*');
+		$config = array('safe'=>0, 'elements' => '-*');
     		return htmLawed($dirty_html, $config);
 	}
 }
