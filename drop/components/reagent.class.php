@@ -4,31 +4,39 @@ require('drop/3rdparty/htmlLawed.php');
 
 
 class reagent {
-
+	// prevents XSS from being used
 	public function clean_html($dirty_html) {
 		$config = array('safe'=>1);
     		return htmLawed($dirty_html, $config);
 	}
 
+	// strips all HTML from input
 	public function purge_html($dirty_html) {
 		$config = array('safe'=>1, 'elements' => '-*');
     		return htmLawed($dirty_html, $config);
 	}
 	
-	
 	// we use filter_var: http://php.net/manual/en/filter.examples.validation.php
 	// the settings can be found here: http://php.net/manual/en/filter.filters.validate.php
-	public function is_email($email) {
+	// returns true if email looks valid
+	public function validate_email($email) {
 		return filter_var($email, FILTER_VALIDATE_EMAIL);
 	}
 	
-	public function is_ipaddr($ip) {
+	// returns true is ip looks valid
+	public function validate_ip($ip) {
 		return filter_var($ip, FILTER_VALIDATE_IP);
 	}
 	
-	public function check_length($str, $min, $max) {
-		return (strlen($str) > $max || strlen($str) < $min);
+	// returns true if string is between or equal to $min and $max
+	public function validate_length($str, $min, $max) {
+		$len = strlen($str);
+		if($len < $min || $len > $max)
+			return false;
+		return true;
 	}
+	
+	
 }
 
 $reagent = new reagent();
