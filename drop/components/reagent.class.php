@@ -16,7 +16,7 @@ class reagent {
 	}
 
 	public function purge_html($dirty_html){
-		$config = array('safe'=>0, 'elements' => '-*');
+		$config = array('safe'=>0);
     		return htmLawed($dirty_html, $config);
 	}
 }
