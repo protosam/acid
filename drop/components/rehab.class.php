@@ -8,7 +8,11 @@ class rehab {
 	
 	public function profile(){
 		if($this->running){
-			echo memory_get_usage();
+			echo '<hr>';
+			echo memory_get_peak_usage();
+			echo '<hr>';
+			echo memory_get_peak_usage(true);
+			echo '<hr>';
 		}
 	}
 }
