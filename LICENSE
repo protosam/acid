@@ -1,3 +1,9 @@
+Note: Some of dependencies of acid adhere to different licenses. You can view
+the individual files and if it is subject to differnet liencsure, the file
+will blatantly tell you in the head of the file. Acid is licensed under the
+MIT license, which you can read the terms of below.
+
+---------------------
 The MIT License (MIT)
 
 Copyright (c) 2015 Sam
