@@ -22,7 +22,7 @@
 	}
 
 	// static function used for setting up a link to the mysqli instance
-	public function setlink($lnk){
+	public static function setlink($lnk){
 		self::$_LINK = $lnk;
 	}
 	
