@@ -3,17 +3,17 @@
  *
  * mysqli wrapper with CRUD
  */
- 
+
  class catalyst {
 	public static $_LINK = 'nope';
 	public $link = 'nope';
-	
+
 	public $primary_key = null;
 	public $table_name = null;
 
 	public $raw_fields = array(); // raw fields with unsanitized data
 	public $mod_fields = array(); // modified fields with unsanitized data | this is used for efficient row updates
-	
+
 	public $prepared = array(); // prepared data to replace {variables} with in query statements
 	public $last_query_result = null; // used by the db $link
 
@@ -25,42 +25,45 @@
 	public static function setlink($lnk){
 		self::$_LINK = $lnk;
 	}
-	
+
 	public function set($var, $val){
 		$this->raw_fields[$var] = $val;
 		$this->mod_fields[$var] = $val;
 	}
-	
+
 	public function get($var){
 		return $this->raw_fields[$var];
 	}
-	
-	
-	// fuction for finding results by a single 
+
+
+	// fuction for finding results by a single
 	public function findby($var, $val, $limit = 0, $offset = 0){
-		$this->prepare('value', $val);
-		$sql = "select * from `".$this->table_name."` where $var = '{value}'";
+		$this->prepare($var, $val);
+		$sql = "select * from `".$this->table_name."` where $var = '{".$var."}'";
 		if($limit > 0)
 			$sql .= " limit $limit";
 		if($offset > 0)
 			$sql .= " offset $offset";
-		
+
 		$this->query($sql);
 	}
-	
+
 	public function save(){
 		// New data needs to be inserted
 		if (!array_key_exists($this->primary_key, $this->raw_fields)) {
 			// INSERT INTO $tablename (col1, col2, col3) VALUES (val1, val2, val3);
-			$final_statement = "INSERT INTO `" . $this->table_name . "` ";
+			// INSERT INTO users SET col1 = val1, col2 = val2
+			$final_statement = "INSERT INTO `" . $this->table_name . "` SET ";
 
-			$fields = '`' . $this->primary_key . '`';
-			$values = 'null';
+			$field_divider = false;
 			foreach ($this->raw_fields as $field => $value) {
-				$values .= ", '".$this->link->escape_string($value)."'";
-				$fields .= ', `' . $field . '`';
+				if($field_divider)
+					$final_statement .= ", ";
+				$final_statement .= "`$field` = '".$this->link->escape_string($value)."'";
+				$field_divider = true;
 			}
-			$final_statement .= "(" . $fields . ") VALUES (" . $values . ");";
+
+			$final_statement .=";";
 
 			$err_check = $this->link->query($final_statement);
 			if (!$err_check) {
@@ -88,7 +91,7 @@
 			$this->link->query($final_statement);
 		}
 	}
-	
+
 	public function delete(){
 		if ($this->primary_key == null || $this->primary_key == '') {
 			echo 'Can not use delete() method without a set primary_key for ' . $this->table_name;
@@ -98,7 +101,7 @@
 		$final_statement = 'DELETE FROM `' . $this->table_name . '` WHERE `' . $this->primary_key . '` = "' . $this->raw_fields[$this->primary_key] . '";';
 		$this->link->query($final_statement);
 	}
-	
+
 	// Used to sanitize data going through query()
 	public function prepare($var, $val = null) {
 		if (is_array($var) && count($var) > 0) {
@@ -109,7 +112,7 @@
 			$this->prepared[$var] = $val;
 		}
 	}
-	
+
 	// function for running MySQL queries
 	public function query($query, $autonext = true) {
 		// Sanitize that shizzzzz if there are things to fill in from $this->prepared
@@ -131,6 +134,7 @@
 			// Empty this out now!
 			$this->prepared = array();
 		}
+
 		$this->last_query = $query;
 		$this->last_query_result = $this->link->query($query);
 		if (!$this->last_query_result) {
@@ -139,25 +143,35 @@
 		if ($autonext && $this->count() > 0)
 			$this->next();
 	}
-	
+
 	public function next(){
 		$this->raw_fields = $this->last_query_result->fetch_assoc();
 		$this->mod_fields = array();
-		
+
 		// return false if we're done providing data
 		if ($this->raw_fields == NULL) {
 			// clean up variables
 			$this->raw_fields = array();
 			$this->mod_fields = array();
-			
+
 			// the fuck off result
 			return false;
 		}
 		// returns true if we were successful
 		return true;
-		
+
 	}
-	
+
+	public function getobject(){
+		$obj = array();
+		if($this->count() > 0)
+		do {
+			array_push($obj, $this->raw_fields);
+		}while($this->next());
+
+		return $obj;
+	}
+
 	// Gives us a count of the number of rows from the last query
 	public function count() {
 		if (!$this->last_query_result)
