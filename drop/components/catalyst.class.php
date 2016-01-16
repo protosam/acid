@@ -11,6 +11,8 @@
 	public $primary_key = null;
 	public $table_name = null;
 
+	public $join_fragment = null;
+
 	public $raw_fields = array(); // raw fields with unsanitized data
 	public $mod_fields = array(); // modified fields with unsanitized data | this is used for efficient row updates
 
@@ -32,14 +34,16 @@
 	}
 
 	public function get($var){
-		return $this->raw_fields[$var];
+		if(isset($this->raw_fields[$var]))
+			return $this->raw_fields[$var];
+		return null;
 	}
 
 
 	// fuction for finding results by a single
 	public function findby($var, $val, $limit = 0, $offset = 0){
 		$this->prepare($var, $val);
-		$sql = "select * from `".$this->table_name."` where $var = '{".$var."}'";
+		$sql = "select * from `".$this->table_name."` ".$this->join_fragment." where $var = '{".$var."}'";
 		if($limit > 0)
 			$sql .= " limit $limit";
 		if($offset > 0)
