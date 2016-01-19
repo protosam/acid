@@ -18,6 +18,7 @@
 
 	public $prepared = array(); // prepared data to replace {variables} with in query statements
 	public $last_query_result = null; // used by the db $link
+	public $last_query = "";
 
 	public function __construct(){
 		$this->link = self::$_LINK;
@@ -41,9 +42,46 @@
 
 
 	// fuction for finding results by a single
-	public function findby($var, $val, $limit = 0, $offset = 0){
-		$this->prepare($var, $val);
-		$sql = "select * from `".$this->table_name."` ".$this->join_fragment." where $var = '{".$var."}'";
+	public function findby($var, $val, $order_by = null, $limit = 0, $offset = 0){
+
+		if(is_array($var) && is_array($val)){
+			$sql = "select * from `".$this->table_name."` ".$this->join_fragment." where ";
+			$first = true;
+			foreach($var as $k => $v){
+				$this->prepare($v, $val[$k]);
+				if(strpos($v, ".") !== false)
+					$field = $v;
+				else
+					$field = $this->table_name.".".$v;
+
+				if($first){
+
+					$sql .= "$field = '{".$v."}'";
+					$first = false;
+				}else{
+					$sql .= " and $field = '{".$v."}'";
+				}
+			}
+		}else{
+			$this->prepare($var, $val);
+
+			if(strpos($var, ".") !== false)
+				$field = $var;
+			else
+				$field = $this->table_name.".".$var;
+
+			$sql = "select * from `".$this->table_name."` ".$this->join_fragment." where $field = '{".$var."}'";
+		}
+		if($order_by != null){
+			if(strpos($order_by, ".") !== false){
+				$sql .= " order by $order_by";	
+			}else{
+				$sql .= " order by ".$this->table_name.".$order_by";
+
+			}
+
+		}
+
 		if($limit > 0)
 			$sql .= " limit $limit";
 		if($offset > 0)
