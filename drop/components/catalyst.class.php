@@ -40,6 +40,26 @@
 		return null;
 	}
 
+	public function findall($order_by = null, $limit = 0, $offset = 0){
+
+		$sql = "select * from `".$this->table_name."` ".$this->join_fragment;
+		if($order_by != null){
+			if(strpos($order_by, ".") !== false){
+				$sql .= " order by $order_by";
+			}else{
+				$sql .= " order by ".$this->table_name.".$order_by";
+
+			}
+
+		}
+
+		if($limit > 0)
+			$sql .= " limit $limit";
+		if($offset > 0)
+			$sql .= " offset $offset";
+
+		$this->query($sql);
+	}
 
 	// fuction for finding results by a single
 	public function findby($var, $val, $order_by = null, $limit = 0, $offset = 0){
@@ -74,7 +94,7 @@
 		}
 		if($order_by != null){
 			if(strpos($order_by, ".") !== false){
-				$sql .= " order by $order_by";	
+				$sql .= " order by $order_by";
 			}else{
 				$sql .= " order by ".$this->table_name.".$order_by";
 
@@ -114,7 +134,7 @@
 
 
 			// now we will return only this one
-			$this->findby($this->primary_key, $this->link->insert_id, 1);
+			$this->findby($this->primary_key, $this->link->insert_id, null, 1);
 		} else {
 			// UPDATE $tablename SET col1 = val, col2 = val WHERE $primary_key = $this->get($primary_key)
 			$final_statement = "UPDATE `" . $this->table_name . "` SET";
@@ -192,9 +212,7 @@
 
 		// return false if we're done providing data
 		if ($this->raw_fields == NULL) {
-			// clean up variables
-			$this->raw_fields = array();
-			$this->mod_fields = array();
+			$this->clear();
 
 			// the fuck off result
 			return false;
@@ -219,5 +237,11 @@
 		if (!$this->last_query_result)
 			return 0;
 		return $this->last_query_result->num_rows;
+	}
+
+	public function clear(){
+		// clean up variables
+		$this->raw_fields = array();
+		$this->mod_fields = array();
 	}
 }
