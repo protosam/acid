@@ -78,18 +78,26 @@
 					$value = $val[$k];
 				}
 
-				$this->prepare($v, $value);
-				if(strpos($v, ".") !== false)
-					$field = $v;
+				if(is_array($v)){
+					$gluecon = $v[0];
+					$fieldin = $v[1];
+				}else{
+					$gluecon = "and";
+					$fieldin = $v;
+				}
+
+				$this->prepare($fieldin, $value);
+				if(strpos($fieldin, ".") !== false)
+					$field = $fieldin;
 				else
-					$field = $this->table_name.".".$v;
+					$field = $this->table_name.".".$fieldin;
 
 				if($first){
 
-					$sql .= "$field ".$operator." '{".$v."}'";
+					$sql .= "$field ".$operator." '{".$fieldin."}'";
 					$first = false;
 				}else{
-					$sql .= " and $field ".$operator." '{".$v."}'";
+					$sql .= " ".$gluecon." $field ".$operator." '{".$fieldin."}'";
 				}
 			}
 		}else{
