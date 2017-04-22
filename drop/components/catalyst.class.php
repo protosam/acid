@@ -67,8 +67,18 @@
 		if(is_array($var) && is_array($val)){
 			$sql = "select * from `".$this->table_name."` ".$this->join_fragment." where ";
 			$first = true;
+
 			foreach($var as $k => $v){
-				$this->prepare($v, $val[$k]);
+
+				if(is_array($val[$k])){
+					$operator = $val[$k][0];
+					$value = $val[$k][1];
+				}else{
+					$operator = "=";
+					$value = $val[$k];
+				}
+
+				$this->prepare($v, $value);
 				if(strpos($v, ".") !== false)
 					$field = $v;
 				else
@@ -76,10 +86,10 @@
 
 				if($first){
 
-					$sql .= "$field = '{".$v."}'";
+					$sql .= "$field ".$operator." '{".$v."}'";
 					$first = false;
 				}else{
-					$sql .= " and $field = '{".$v."}'";
+					$sql .= " and $field ".$operator." '{".$v."}'";
 				}
 			}
 		}else{
@@ -222,7 +232,11 @@
 
 	}
 
-	public function getobject(){
+	public function getobject($current_only = false){
+		if($current_only){
+			return $this->raw_fields;
+		}
+
 		$obj = array();
 		if($this->count() > 0)
 		do {
