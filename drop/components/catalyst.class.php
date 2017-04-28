@@ -67,9 +67,7 @@
 		if(is_array($var) && is_array($val)){
 			$sql = "select * from `".$this->table_name."` ".$this->join_fragment." where ";
 			$first = true;
-
 			foreach($var as $k => $v){
-
 				if(is_array($val[$k])){
 					$operator = $val[$k][0];
 					$value = $val[$k][1];
@@ -107,7 +105,6 @@
 				$field = $var;
 			else
 				$field = $this->table_name.".".$var;
-
 			$sql = "select * from `".$this->table_name."` ".$this->join_fragment." where $field = '{".$var."}'";
 		}
 		if($order_by != null){
@@ -238,6 +235,19 @@
 		// returns true if we were successful
 		return true;
 
+	}
+
+	public function results(){
+		$out = array();
+
+		// Need to ensure we start from the beginning.
+		$this->query($this->last_query);
+
+		if($this->count() > 0)
+		do {
+			array_push($out, clone $this);
+		}while($this->next());
+		return $out;
 	}
 
 	public function getobject($current_only = false){
