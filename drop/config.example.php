@@ -1,6 +1,5 @@
 <?php
 $CONF = array(
-
 	'database' => array(
 		'hostname' => '',
 		'database' => '',
@@ -10,6 +9,7 @@ $CONF = array(
 		'socket' => null
 	),
 
+	// Optional configuration to use redis. Set to enabled to "true" to use redis.
 	'redis' => array(
 		'enabled' => false,
 		'hostname' => 'localhost',
