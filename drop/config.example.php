@@ -15,4 +15,9 @@ $CONF = array(
 		'hostname' => 'localhost',
 		'port' => 6379
 	),
+	
+	'date_default_timezone' => "America/Chicago",
 );
+
+
+
