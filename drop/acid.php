@@ -1,4 +1,15 @@
 <?php
+// A debug function that writes to dbg.log
+function dbg($str){
+	if(file_exists('dbg.log'))
+		$current = file_get_contents('dbg.log');
+	else
+		$current = "";
+
+	$current .= "\n".$str;
+	file_put_contents('dbg.log', $current);
+}
+
 // start buffering
 ob_start();
 // start session
@@ -35,6 +46,9 @@ if(!file_exists('drop/config.php'))
 
 // Include all the things we will need.
 require('drop/config.php');
+
+// set the timezone...
+date_default_timezone_set($CONF['date_default_timezone']);
 
 
 // Connect to keystore
@@ -88,6 +102,11 @@ if(!isset($redis_only) || $redis_only != true){
 
 	}
 
+
+	// lets run the no template function if there is no template...
+	if(!$tpl_file && $tpl_file == "")
+		vision_no_template();
+
 	// lets spit out a header...
 	if($tpl_file && $tpl_file != "")
 		vision_header();
@@ -111,7 +130,9 @@ if(!isset($redis_only) || $redis_only != true){
 		$db->close();
 
 		// ensure redis connection is closed
-		$redis->close();
+		if(isset($redis)){
+			$redis->close();
+		}
 
 		// end buffering
 		ob_end_flush();
