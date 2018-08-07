@@ -56,6 +56,9 @@ if($CONF['redis']['enabled'] == true){
 	$redis = new Redis();
 	try {
 		$redis->connect($CONF['redis']['hostname'], $CONF['redis']['port']);
+		if($CONF['redis']['password'] != false){
+			$redis->auth($CONF['redis']['password']);
+		}
 	} catch (Exception $e) {
 	    overdose("Couldn't connected to Redis: ".$e->getMessage());
 	}
