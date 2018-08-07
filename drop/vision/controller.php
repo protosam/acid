@@ -22,3 +22,11 @@ function vision_footer()
 	$tpl->parse('footer');
 	$tpl->out('footer');
 }
+
+
+// This function is ran in place of vision_header() if the template file is
+// empty for a specified path
+function vision_no_template()
+{
+	// Do nothing example.
+}
