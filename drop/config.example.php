@@ -13,6 +13,7 @@ $CONF = array(
 	'redis' => array(
 		'enabled' => false,
 		'hostname' => 'localhost',
+		'password' => false,
 		'port' => 6379
 	),
 	
